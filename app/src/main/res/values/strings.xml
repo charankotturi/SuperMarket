@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SuperMarket</string>
+    <string name="drawer_end">drawer_end</string>
+    <string name="drawer_start">drawer_start</string>
+</resources>

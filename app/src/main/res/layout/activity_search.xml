@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SToolBar"
+        android:background="#40C4FF"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SToolBar"
+        android:id="@+id/relLayoutSearchBox"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search item"
+            android:id="@+id/editTxtSearch"
+            android:layout_margin="10dp"
+            android:layout_toStartOf="@+id/btnSearch"
+            />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_search"
+            android:layout_margin="10dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnSearch"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/relLayoutSearchBox"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/LinearLayout"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="First category"
+            android:textStyle="bold"
+            android:id="@+id/firstSearchCategory"
+            android:visibility="gone"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Second category"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:id="@+id/secondSearchCategory"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Third category"
+            android:layout_marginHorizontal="10dp"
+            android:textStyle="bold"
+            android:id="@+id/thirdSearchCategory"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayout"
+        android:text="See all categories"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:id="@+id/txtSeeAllCategories"
+        android:textColor="@color/colorPrimary"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtSeeAllCategories"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/recViewSearchBox"
+        android:layout_above="@+id/SBottomNavMenu"
+        />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/SBottomNavMenu"
+        app:menu="@menu/bottom_navigation_menu"
+        />
+
+</RelativeLayout>

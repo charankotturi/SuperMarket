@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:background="#448AFF"
+    android:padding="10dp"
+    android:gravity="bottom"
+    >
+
+    <ImageView
+        android:id="@+id/imgAcc"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/ic_launcher_round"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAccName"
+        android:text="SuperMart"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtWebsite"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="Website@supermart.co.in"
+        android:textStyle="italic"
+        />
+
+</LinearLayout>
