@@ -18,6 +18,7 @@ public class groceryItems implements Parcelable {
     private int popularityPoints;
     private ArrayList<Review> reviews;
 
+
     public groceryItems(String name, String description, String imageUrl, String category, double price, float availableAmount) {
         this.ID = Utils.getId();
         this.name = name;

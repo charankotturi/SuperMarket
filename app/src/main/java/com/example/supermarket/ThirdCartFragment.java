@@ -1,6 +1,7 @@
 package com.example.supermarket;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,21 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 import static com.example.supermarket.SecondCartFragment.ORDER_CALL;
 
 public class ThirdCartFragment extends Fragment {
 
     public static final String CALL_BACK = "call_back";
+    private static final String TAG = "response_result";
 
     private TextView txtAddress, txtItems, txtPrice, txtNumber, txtWarning;
     private Button btnNext, btnPrevious;
@@ -88,13 +99,49 @@ public class ThirdCartFragment extends Fragment {
                         }
                         orderObject.setSuccess(true);
 
-                        System.out.println(orderObject);
-                        //TODO:send the object payment to the web server using the retrofit library.
                         PaymentResultFragment paymentResultFragment = new PaymentResultFragment();
 
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frameLayout, paymentResultFragment);
-                        transaction.commit();
+                        System.out.println(orderObject);
+
+                        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
+                                .setLevel(HttpLoggingInterceptor.Level.BODY);
+
+                        OkHttpClient client = new OkHttpClient.Builder()
+                                .addInterceptor(interceptor)
+                                .build();
+
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl("https://jsonplaceholder.typicode.com/")
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .client(client)
+                                .build();
+
+                        EndPoint endPoint = retrofit.create(EndPoint.class);
+                        Call<OrderObject> call = endPoint.newObjects(orderObject);
+                        call.enqueue(new Callback<OrderObject>() {
+                            @Override
+                            public void onResponse(Call<OrderObject> call, Response<OrderObject> response) {
+                                if(response.isSuccessful()){
+                                    Log.d(TAG, "onResponse: Successful");
+
+                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.frameLayout, paymentResultFragment);
+                                    transaction.commit();
+                                }else{
+                                    Log.d(TAG, "onResponse: Successful");
+
+                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.frameLayout, paymentResultFragment);
+                                    transaction.commit();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<OrderObject> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+
+
                     }
                 });
             }
